@@ -47,7 +47,7 @@ Use these options to remove features from the game.  Permitted values are YES an
 
 Change this to YES to output the reasons for world map rejection into a file.
 
-[LOG_MAP_REJECTS:NO]
+[LOG_MAP_REJECTS:YES]
 
 Change these numbers to make the embark rectangle start at a different size.  The format is (EMBARK_RECTANGLE:<width>:<height>).  Numbers may run from 2 to 16.  The map size warning message will go by these numbers.
 

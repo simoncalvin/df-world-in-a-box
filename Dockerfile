@@ -11,9 +11,9 @@ xvfb
 
 ENV DISPLAY :1
 
-COPY df_linux /df_linux
+VOLUME mkdir /world_gen
 
-RUN mkdir /world_gen
+COPY df_linux /df_linux
 
 COPY ./docker-entrypoint.sh /usr/local/bin
 

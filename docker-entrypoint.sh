@@ -6,14 +6,24 @@ Xvfb :1 -screen 0 1024x768x16 &
 
 echo "Starting world gen"
 
-./df_linux/df -gen 1 RANDOM "POCKET REGION"
+./df_linux/df -gen 1 RANDOM "POCKET REGION" &
 
-echo "Creating output directory"
+while [ 'ps -p $! > /dev/null' ]
+do
+	if [ -f ./df_linux/map_rejection_log.txt ] && [[ $(cat ./df_linux/map_rejection_log.txt | wc -l) -gt 32000 ]]
+	then
+		echo "Failed: too many rejections"
+
+		cp ./df_linux/map_rejection_log.txt /world_gen/$(hostname)-map_rejection_log.txt
+
+		exit 1
+	fi
+done
 
 world=$(head -n 1 ./df_linux/region1-00030-01-01-world_history.txt)
 world=${world// /_}
 
-echo "Generated: $world"
+echo "Creating output directory for $world"
 
 mkdir -p /world_gen/$(hostname)/$world
 
